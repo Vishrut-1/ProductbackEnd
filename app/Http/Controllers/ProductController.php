@@ -22,10 +22,13 @@ class ProductController extends Controller
 
         $productData = Product::create($request->all());
 
-        $image = new ProductImage();
-        $image->product_id = $productData->id;
-        $image->image = $name;
-        $image->save();
+        if ($request->has('product_image') != null) {
+
+            $image = new ProductImage();
+            $image->product_id = $productData->id;
+            $image->image = $name;
+            $image->save();
+        }
         return response()->json($productData);
     }
 
